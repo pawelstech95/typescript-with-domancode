@@ -3,62 +3,96 @@ import './App.css';
 
 function App() {
 
-    // function addition(firstNumber:number | string =0, secondNumber:number |string =0) {
-    //  const a = typeof firstNumber === 'number' ? firstNumber : Number(firstNumber)
-    //     const b = typeof secondNumber === 'number' ? secondNumber : Number(firstNumber)
+    // const user = {} as { age: string, names?: { firstName: string, lastName: string } }
     //
-    //     return a+ b;
+    // user.age = '31'
+    // // user.names = {} as { firstName: string, lastName: string }
+    // user.names.firstName = 'Paweł'
+    // user.names.lastName = 'Developer'
     //
+    // function showUserInfo(user: { age: number | string, names?: { firstName: string, lastName: string } }) {
+    //     const {age, names: {firstName, lastName} = {firstName: 'Unknown', lastName: 'User'}} = user;
+    //     return `${firstName} ${lastName} has ${age}`
     // }
-    type Addition = (firstNumber?: number | string, secondNumber?: number | string) => number
+    //
+    // console.log(showUserInfo(user))
 
-    const addition: Addition = (firstNumber = 0, secondNumber = 0) => {
-        const a = typeof firstNumber === 'number' ? firstNumber : Number(firstNumber)
-        const b = typeof secondNumber === 'number' ? secondNumber : Number(firstNumber)
+    // {
+    //     const {age, names: {firstName, lastName} = {firstName: 'Unknown', lastName: 'User'}} = user;
+    //     return `${firstName} ${lastName} has ${age}`
+    // }
 
-        return a + b;
 
+    // ---------------->    Interface
+
+    interface Names {
+        firstName: string,
+        lastName: string
     }
-    const ADDITION_BUTTON_ID = 'addition-button'
-    const FIRST_NUMBER_ID = 'first-number'
-    const NUMBER_CLASS = '.number'
-    const RESULT_PLACECHOLDER_ID = 'result-placecholder'
-    const SECOND_NUMBER_ID = 'second-number'
 
-    const addButton = document.getElementById(ADDITION_BUTTON_ID);
-    addButton?.addEventListener('click', () => {
-        const firstNumber = document.getElementById(`#${FIRST_NUMBER_ID}`) as HTMLInputElement | null
-        const secondNumber = document.querySelector(SECOND_NUMBER_ID) as HTMLInputElement | null
-        const resultPlacecholder = document.getElementById(RESULT_PLACECHOLDER_ID) as HTMLSpanElement | null
+    interface User {
+        age: number;
+        names: Names
+    }
 
-        const [firstInput, secondInput] = Array.from(document.querySelectorAll<HTMLInputElement>(NUMBER_CLASS))
-
-        if (!firstInput || !secondInput || !resultPlacecholder) {
-            console.error('nie znaleziono wszystkich wymaganych elementow w  funkcji click')
-            return;
+    // interface Player {
+    //     nick: string;
+    //     names?: Names
+    // }
+    type Player = {
+        nick: string,
+        names: {
+            firstName: string,
+            lastName: string,
         }
+    }
+    const user: User = {
+        age: 25,
+        names: {
+            firstName: 'Paweł',
+            lastName: 'Developer'
+        }
+    }
+    const player: Player = {
+        nick: 'Cypi',
+        names: {
+            firstName: 'Cyprian',
+            lastName: 'Homek'
+        }
+    }
 
-        const result = addition(firstInput.value, secondInput.value);
+    const peopleList: (User | Player)[] = [];
+    // const firstNameOfSomeone = peopleList[5].names.firstName; // nie
 
-        resultPlacecholder.textContent = `${result}`
+    peopleList.push(player)
+    peopleList.push(user)
+    peopleList.forEach(person => {
+        if ('age' in person) {
+
+            console.log(showUserInfo(person))
+        } else {
+            console.log(showUserInfo({...person, age: 0}))
+        }
     })
-    console.log('hello')
 
+    function showUserInfo(user: User) {
+        const {age, names: {firstName, lastName} = {firstName: 'Unknown', lastName: 'User'}} = user;
+        return `${firstName} ${lastName} has ${age}`
+    }
+
+    function showFirstNameLastName(person: { names: { firstName: string, lastName: string } }
+    ) {
+        const {firstName, lastName} = person.names
+        return `${firstName} ${lastName}`
+    }
+
+
+    console.log(showUserInfo(user))
+    console.log(showFirstNameLastName(user))
+    console.log(showFirstNameLastName(player))
     return (
         <div className="App">
-            <header className="App-header">
-                <p>Calculator</p>
-                <label>First number:
-                    <input id='first-number' className='number' type='number'/>
-                </label>
 
-                <label>Second number:
-                    <input id='second-number' className='number' type='number'/>
-                </label>
-                <button id='addition-button' type='button'>Addition</button>
-                <p>Result<span id='result-placecholder'>0</span></p>
-
-            </header>
         </div>
     );
 }
