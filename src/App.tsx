@@ -74,6 +74,43 @@ function App() {
         Cyprian: {id: 2, firstName: 'Cyprian', lastName: 'Developer'}
     }
 
+
+    // PICK
+
+    type Person1 = {
+        id: number;
+        firstName: string;
+        lastName: string;
+        age: number
+    }
+
+    function updateUserFirstName(id: number, personToUpdate: Pick<Person1, 'firstName' | 'lastName'>) {
+
+    }
+
+    // OMIT
+
+    function updatePerson(id: number, personToUpdate: Omit<Person1, 'id'>) {
+        personToUpdate.id = 5
+    }
+
+    // EXCLUDE
+
+    type TechnologiesInOurCompany = 'React' | 'Viue' | 'Nest.js' | 'PHP' | '.Net' | 'Cypress';
+    type BackendTechnologies = 'Nest.js' | 'PHP' | '.Net';
+
+    // type FrontendTechnologiesInOurCompany = Exclude<TechnologiesInOurCompany, 'PHP' | 'Nest.js' | '.Net'>
+    type FrontendTechnologiesInOurCompany = Exclude<TechnologiesInOurCompany, BackendTechnologies>
+    const jsDevOnFront: FrontendTechnologiesInOurCompany = 'React';
+
+    // EXTRACT 
+    
+    type DomanDev = 'React' | 'TS' | 'JS' | 'C'
+    
+    const newFrontendDev: Extract<TechnologiesInOurCompany, DomanDev> = 'React'
+    
+    
+    
     return (
         <div className="App">
             <p>asda</p>
