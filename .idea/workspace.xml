@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d800b59-8d51-4e14-9a6a-8c7d393faa45" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/TypeScript/function.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TypeScript/Object.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +101,7 @@
       <workItem from="1626336928402" duration="40000" />
       <workItem from="1626440827305" duration="50000" />
       <workItem from="1626853845670" duration="3919000" />
-      <workItem from="1626857877497" duration="364000" />
+      <workItem from="1626857877497" duration="1355000" />
     </task>
     <servers />
   </component>

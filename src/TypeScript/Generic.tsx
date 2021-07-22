@@ -79,7 +79,7 @@ function App() {
     //
     // }
 
-    class EmployeeDatabase<T extends { pesel: number }> implements Collection<T> {
+    class EmployeeDatabase<T extends FrontendDev | BackendDev> implements Collection<T> {
         devs: Array<T> = []
 
         addDev(newDev: T) {
