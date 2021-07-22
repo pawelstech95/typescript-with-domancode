@@ -1,185 +1,78 @@
-import {type} from 'os';
 import React from 'react';
 import './App.css';
 
 function App() {
 
-    const names: Array<string> = [];
-    names.push('Paweł')
 
-    const mapObject = new Map<string, number>()
-    const setObject = new Set<number>()
-
-    // setObject.add(1)
-
-    function getAndReturnValue<T>(item: T) {
-        return item
-    }
-
-    const nameWiktor = 'Wiktor'
-
-    const returnedNameWiktor = getAndReturnValue(nameWiktor)
-
-
-    type FrontendFramework = 'React' | 'Vue' | 'Angular'
-    type  BackendFramework = '.Net' | 'Laravel' | 'Nest.js'
-
-    type Employee = {
+    type Person = {
+        id: number;
         firstName: string;
         lastName: string;
-        age: number;
-        pesel: number;
+    }
+    const pawel = {
+        id: 0,
+        firstName: 'Pawel',
+        lastName: 'Developer'
+    }
+    const pawelUpdated = {
+        id: 1,
+        firstName: 'Pawel',
+        lastName: 'Developer'
+    }
+
+    function updatePerson(id: number, mateusz: Partial<Person>) {
 
     }
 
-    type FrontendDev = {
-        frontendFramework: FrontendFramework
-    } & Employee
-
-    type BackendDev = {
-        backendFramework: BackendFramework
-    } & Employee
-
-    interface Collection<T> {
-        devs: Array<T>;
-
-        addDev(newDev: T): void
-
-        getDev(pesel: number): T | null
-
-        removeDev(pesel: number): void
-
-        uupdate(pesel: number, newData: FrontendDev): void
-
+    function anotherUpdate(oldData: Person, newData: Partial<Person>) {
+        return {...oldData, ...newData}
     }
 
-    // interface FrontendDevsCollection {
-    //     devs: Array<FrontendDev>;
-    //
-    //     addDev(newDev: FrontendDev): void
-    //
-    //     getDev(pesel: number): FrontendDev | null;
-    //
-    //     removeDev(pesel: number): void;
-    //
-    //     update(pesel: number, newData: FrontendDev): void
-    //
-    // }
-    //
-    // interface BackendDevsCollection {
-    //     devs: Array<FrontendDev>;
-    //
-    //     addDev(newDev: BackendDev): void
-    //
-    //     getDev(pesel: number): BackendDev | null;
-    //
-    //     removeDev(pesel: number): void;
-    //
-    //     update(pesel: number, newData: BackendDev): void
-    //
-    // }
 
-    class EmployeeDatabase<T extends { pesel: number }> implements Collection<T> {
-        devs: Array<T> = []
-
-        addDev(newDev: T) {
-            this.devs.push(newDev);
-
-        }
-
-        getDev(pesel: number) {
-            return this.devs.find(dev => dev.pesel === pesel) ?? null
-        }
-
-        removeDev(pesel: number) {
-            this.devs = this.devs.filter(dev => dev.pesel !== pesel)
-        }
-
-        update(pesel: number, newData: T) {
-            this.devs = this.devs.map(dev => {
-                if (dev.pesel === pesel) {
-                    return {...dev, ...newData}
-                }
-                return dev;
-            })
-        }
+    const newNameOfPerson = {
+        firstName: 'Cyprian',
     }
 
-    // class FrontendDevsDatabase implements FrontendDevsCollection {
-    //     devs: Array<FrontendDev> = []
-    //
-    //     addDev(newDev: FrontendDev) {
-    //         this.devs.push(newDev);
-    //
-    //     }
-    //
-    //     getDev(pesel: number) {
-    //         return this.devs.find(dev => dev.pesel === pesel) ?? null
-    //     }
-    //
-    //     removeDev(pesel: number) {
-    //         this.devs = this.devs.filter(dev => dev.pesel !== pesel)
-    //     }
-    //
-    //     update(pesel: number, newData: FrontendDev) {
-    //         this.devs = this.devs.map(dev => {
-    //             if (dev.pesel === pesel) {
-    //                 return {...dev, ...newData}
-    //             }
-    //             return dev;
-    //         })
-    //     }
-    //
-    // }
+    updatePerson(0, newNameOfPerson)
+    anotherUpdate(pawel, pawelUpdated)
 
-    // class BackendDevsDatabase implements BackendDevsCollection {
-    //     devs: Array<FrontendDev> = []
-    //
-    //     addDev(newDev: BackendDev) {
-    //         this.devs.push(newDev);
-    //
-    //     }
-    //
-    //     getDev(pesel: number) {
-    //         return this.devs.find(dev => dev.pesel === pesel) ?? null
-    //     }
-    //
-    //     removeDev(pesel: number) {
-    //         this.devs = this.devs.filter(dev => dev.pesel !== pesel)
-    //     }
-    //
-    //     update(pesel: number, newData: BackendDev) {
-    //         this.devs = this.devs.map(dev => {
-    //             if (dev.pesel === pesel) {
-    //                 return {...dev, ...newData}
-    //             }
-    //             return dev;
-    //         })
-    //     }
-    //
-    // }
+    type Employee = {
+        id: number;
+        firstName: string;
+        lastName: string;
+        jobPosition?: string
+    }
 
-    const frontendDevsDatabase = new EmployeeDatabase<FrontendDev>()
-    frontendDevsDatabase.addDev({
-        firstName: 'Paweł',
-        lastName: 'developer',
-        age: 31,
-        pesel: 98267377377,
-        frontendFramework: 'React'
+    function newWorker(newWorker: Required<Employee>) {
+    }
 
-    })
+    const newFrontend: Required<Employee> = {
+        id: 98,
+        firstName: 'Alex',
+        lastName: 'Popek',
+        jobPosition: "Front"
+    }
+    newWorker(newFrontend)
+
+    const alek: Readonly<Employee> = {
+        id: 23,
+        firstName: 'Alexander',
+        lastName: 'Domek',
+        jobPosition: 'Backend',
+    }
+    // alek.firstName = 'Wikary'
 
 
-    const backendDevsDatabase = new EmployeeDatabase<BackendDev>()
-    backendDevsDatabase.addDev({
-        firstName: 'Paweł',
-        lastName: 'developer',
-        age: 31,
-        pesel: 98267377377,
-        backendFramework: 'Nest.js'
+    type NamesKey = 'Pawel' | 'Ania' | 'Cyprian'
 
-    })
+    type MyFamilyType = Record<NamesKey, Partial<Person>>;
 
+
+    const myFamily: MyFamilyType = {
+        Pawel: {id: 9, firstName: 'Pawel', lastName: 'Developer'},
+        Ania: {id: 4, firstName: 'Ania', lastName: 'Developer'},
+        Cyprian: {id: 2, firstName: 'Cyprian', lastName: 'Developer'}
+    }
 
     return (
         <div className="App">
